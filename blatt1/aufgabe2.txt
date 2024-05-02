@@ -1,0 +1,22 @@
+X   Y
+1   9.50
+2   21.86
+3   30.65
+4   45.52
+5   49.77
+
+a) covariance s(xy), pearson correlation r(xy)
+    s_xy = 26.05
+    r_xy = 1.237
+    siehe test.py
+
+b) calculate linear regression f(x) and f(3)
+    k = r_xy * s_y/s_xy = 13.025
+    d = mean(y) - k* mean(x) = -7.615
+    f(x) = 13.025*x - 7.615
+    f(3) = 31.46
+    siehe test.py
+
+c) 
+    About 31.46 messages are sent per hour, as that is the gradient of the
+    function.

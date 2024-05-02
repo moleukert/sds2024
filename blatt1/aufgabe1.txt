@@ -1,0 +1,29 @@
+a)
+    year: continuous
+    month: ordinal/nominal
+    state: nominal
+    magnitude: ordinal
+    length: continuous
+    width: diskrete
+    injured: diskrete
+
+b)
+    1) frequency of tornados with magnitude >=2: (n=5)
+    magnitude | frequency   | relative
+    2         | 3           | 3/5
+    3         | 1           | 1/5
+    4         | 1           | 1/5
+
+    2) frequency of tornados with injured >=1: (n=5)
+    injured | frequency | relative
+    1       | 1         | 1/5
+    5       | 1         | 1/5
+    6       | 1         | 1/5
+    63      | 1         | 1/5
+    515     | 1         | 1/5
+
+c)
+    1) median and mean of injured
+    median = 0, mean = (5+515+63+1+6)/16 = 36.875
+    2) mode of month
+    mode = 12 (7 times)
