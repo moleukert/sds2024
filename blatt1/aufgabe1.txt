@@ -4,8 +4,8 @@ a)
     state: nominal
     magnitude: ordinal
     length: continuous
-    width: diskrete
-    injured: diskrete
+    width: discrete
+    injured: discrete
 
 b)
     1) frequency of tornados with magnitude >=2: (n=5)
