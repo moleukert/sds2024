@@ -3,8 +3,8 @@ import numpy as np
 
 def test():
     n = 5
-    x = [1,2,3,4,5]
-    y = [9.5,21.86,30.65,45.52,49.77]
+    x = np.asarray([1,2,3,4,5],dtype=int)
+    y = np.asarray([9.5,21.86,30.65,45.52,49.77],dtype=float)
     # co-variance
     s_xy = 1/(n-1) * np.sum((x-np.mean(x))*(y-np.mean(y)))
     # standard deviations

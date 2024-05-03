@@ -70,7 +70,7 @@ def teilaufgabe_b():
     
     # Implementieren Sie hier Ihre Lösung
     n = len(selling_price)
-
+    # calculate rmse = (1/n sgrt( sum( (y-f(x))^2) ) )
     rmse = 1/n*np.sqrt(np.sum(np.square(selling_price-y_pred)))
     
     return rmse
