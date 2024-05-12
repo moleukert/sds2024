@@ -1,7 +1,7 @@
 # -------------------------------
 # Abgabegruppe: Gruppe 10
 # Personen: Alisha Vaders, Moritz Leukert, Yann-Cédric Gagern
-# HU-Accountname: , , gagernya
+# HU-Accountname: leukertm, vadersal, gagernya
 # -------------------------------
 import numpy as np
 
@@ -78,6 +78,7 @@ def teilaufgabe_b():
     '''
     Was bedeutet der RMSE im Kontext dieser Aufgabe?
     Bedeutung: The RMSE in this context would quantify how accurate the predictions of the price using multilinear regression with the year built and km driven are.
+               An error of about 0.184 would mean that the predictions are on average about 184$ off.  
                It is hard to evaluate how good the RMSE of about 0.184 is in this situation but given that it is decently close to 0, the prediction seems good.
     '''
 
