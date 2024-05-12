@@ -7,6 +7,12 @@ a)
     width: discrete
     injured: discrete
 
+    Alternativer Lösungsvorschlag
+    1) diskret: Monat, Magnitude, Bundesstaat, Verletzte
+    2) nominal: Bundesstaat
+    3) ordinal: Monat, Magnitude, Verletzte
+    4) kontinuerlich: Jahr, Streckenlänge, Breite
+
 b)
     1) frequency of tornados with magnitude >=2: (n=5)
     magnitude | frequency   | relative
@@ -24,6 +30,6 @@ b)
 
 c)
     1) median and mean of injured
-    median = 0, mean = (5+515+63+1+6)/16 = 36.875
+    median = 1/2*(x8+x9) = 1/2*(0+0) = 0, mean = (11*0+5+515+63+1+6)/16 = 36.875
     2) mode of month
     mode = 12 (7 times)
