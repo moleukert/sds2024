@@ -1,7 +1,7 @@
 # -------------------------------
-# Abgabegruppe:
-# Personen:
-# HU-Accountname:
+# Abgabegruppe: Gruppe 10
+# Personen: Alisha Vaders, Moritz Leukert, Yann-Cédric Gagern
+# HU-Accountname: , , gagernya
 # -------------------------------
 import numpy as np
 
@@ -40,21 +40,21 @@ def teilaufgabe_a():
     n = len(year_built)
     # initialize A with column of 1's, year_built, km_driven
     matrix_A = np.concatenate([np.full((n,), 1)[:,np.newaxis],year_built[:,np.newaxis],km_driven[:,np.newaxis]], axis=1)
-    
+
     # check if operations can be performed
-    if( np.linalg.det(matrix_A.T @ matrix_A) == 0):
+    if np.linalg.det(matrix_A.T @ matrix_A) == 0:
         print("Cannot invert A.T*A !")
         return None
-    elif(n<2):
+    elif n < 2:
         print("Not enough samples, at least 2 needed!")
         return None
-    
+
     # calculate k = (A.T*A)^-1 * A.T * y
     k = np.linalg.inv(matrix_A.T @ matrix_A) @ matrix_A.T @ selling_price[:,np.newaxis]
     # use k to calculate prediction
     y_pred = k[0] + k[1]*year_built + k[2]*km_driven
-    
-    return y_pred  
+
+    return y_pred
 
 
 def teilaufgabe_b():
@@ -67,12 +67,12 @@ def teilaufgabe_b():
     """
     year_built, km_driven, selling_price = load_honda_city_dataset()
     y_pred = teilaufgabe_a()
-    
+
     # Implementieren Sie hier Ihre Lösung
     n = len(selling_price)
     # calculate rmse = (1/n sgrt( sum( (y-f(x))^2) ) )
     rmse = 1/n*np.sqrt(np.sum(np.square(selling_price-y_pred)))
-    
+
     return rmse
 
     '''
