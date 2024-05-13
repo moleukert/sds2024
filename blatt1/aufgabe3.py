@@ -70,16 +70,21 @@ def teilaufgabe_b():
 
     # Implementieren Sie hier Ihre Lösung
     n = len(selling_price)
-    # calculate rmse = (1/n sgrt( sum( (y-f(x))^2) ) )
-    rmse = 1/n*np.sqrt(np.sum(np.square(selling_price-y_pred)))
+    # calculate rmse = sqrt( (1/n)*sum( (y-f(x))^2) ) 
+    rmse = np.sqrt((1/n)*np.sum(np.square(selling_price-y_pred)))
 
     return rmse
 
     '''
     Was bedeutet der RMSE im Kontext dieser Aufgabe?
     Bedeutung: The RMSE in this context would quantify how accurate the predictions of the price using multilinear regression with the year built and km driven are.
-               An error of about 0.184 would mean that the predictions are on average about 184$ off.  
-               It is hard to evaluate how good the RMSE of about 0.184 is in this situation but given that it is decently close to 0, the prediction seems good.
+               An error of about 0.94 would mean that the predictions are on average about 940$ off.  
+               It is hard to evaluate how good the RMSE of about 0.94 is in this situation but being about 1k off is not optimal, still the prediction seems decent.
+
+               Der RMSE quantifiziert die Prognosegenauigkeit. In diesem Kontext bezieht er sich konkret auf die Prognose des Verkaufspreises mithilfe von multivariater
+               linearer Regression unter Berücksichtigung des Baujahres und des Kilometerstandes. Der RMSE wird in der Einheit der Zielvariablen angegeben, 
+               daher bedeutet ein Fehler von circa 0.94, dass die Prognosen der Verkaufspreise im Durchschnitt um 940$ von den tatsächlichen Werten abweichen. 
+               Die genaue Relevanz hängt vom Kontext ab, fast 1k Dollar abweichung ist definitiv perfekt, aber für lineare Regression wirkt es aktzeptabel.
     '''
 
 
