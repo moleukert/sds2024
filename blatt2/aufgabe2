@@ -1,7 +1,10 @@
 a)
     guilty (a priori) 0.6
-    green eye = 0.6 
+    green eye = P(A)=P(A|B)P(B)+P(A|Bc)P(Bc) = 1*0.6+0.4*0.33 = 0.72
     A = guilty
     B = green eyes
-    xxx
-    1*0.3 / 0.6 = 0.55
+    P(A|B) = (P(B|A)*P(A))/P(B) = 1*0.6 / 0.72 = 0.83
+    
+b)
+    1/(0.02*n) gleichverteilt auf alle Personen mit B-
+    1/0.02*3.800.000 = 1/76000
