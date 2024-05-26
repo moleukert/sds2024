@@ -1,0 +1,31 @@
+a)
+    propability for one picture card: 12/52
+    propability for a second one: 11/51
+    combined: 3/13 * 11/51 = 11/221 = 0.0497
+
+b) 
+    propability for a 5: 1/6
+    variations: all 5, two 5, one 5
+    combined: (1/6)^3 + (1/6)^2 * 5/6 + 1/6*(5/6)^2 = 31/216 = 0.1435
+
+c)
+    propability for win: 1/2
+    variations: one win, 2 wins
+    combined: (1/2)^2 + (1/2)^2 = 1/2 = 0.5
+
+d) 
+    propability for a specific ball: 1/12
+    first is free: then 1/12 for the same or 11/12 for another, then 2/12 ...
+    1* 1/12
+    1* 11/12 * 2/12
+    1* 11/12 * 10/12 * 3/12 = 41/96 = 0.427
+
+e) 
+    1 215 Personen * 0.046 = 55.89 | 1159.11
+    Preis 9959,95
+    11544677.64 for non defect products - 556661.6055 for defect products + 15734.25 for insurance
+    = 11003750.29 expected earnings
+
+
+
+
