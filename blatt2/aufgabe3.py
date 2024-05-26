@@ -78,18 +78,16 @@ def teilaufgabe_c(X, classes, priors, conds):
     """
 
     # Implementieren Sie hier Ihre Lösung
-    prediction = np.zeros((X.shape[0], 1))
-    prediction_log_probs = np.zeros((X.shape[0], classes.size))
     # TODO: check for errors and use classes
-    x_n, x_m = X.shape
-    prediction = np.zeros(x_n)
-    prediction_log_probs = np.zeros(x_n)
-    for i in range(x_n):
+    X_samples, X_features = X.shape
+    prediction = np.zeros((X_samples))
+    prediction_log_probs = np.zeros(X_samples)
+    for i in range(X_samples):
         # set a priori (no, yes)
         prob_n = priors[0]
         prob_y = priors[1]
         # multiply with conditional
-        for j in range(x_m):
+        for j in range(X_features):
             # check if we have the feature or not
             t = abs(X[i][j] - 1)
 
@@ -97,9 +95,9 @@ def teilaufgabe_c(X, classes, priors, conds):
             prob_n *= abs(t - conds[0][j])
             prob_y *= abs(t - conds[1][j])
         # catch 0
-        if (prob_n == 0):
+        if prob_n == 0:
             prob_n = 6e-323
-        if (prob_y == 0):
+        if prob_y == 0:
             prob_y = 6e-323
 
         # compare probs
