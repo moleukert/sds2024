@@ -62,6 +62,8 @@ def teilaufgabe_c(X, classes, priors, conds):
     """
 
     # Implementieren Sie hier Ihre Lösung
+    prediction = np.zeros((X.shape[0], 1))
+    prediction_log_probs = np.zeros((X.shape[0], classes.size))
 
     prediction = None
     prediction_log_probs = None
