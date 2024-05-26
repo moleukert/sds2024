@@ -1,7 +1,7 @@
 # -------------------------------
-# Abgabegruppe: Gruppe 10
-# Personen: Alisha Vaders, Moritz Leukert, Yann-Cédric Gagern
-# HU-Accountname: vadersal, leukertm, gagernya
+# Abgabegruppe:
+# Personen:
+# HU-Accountname:
 # -------------------------------
 import numpy as np
 import pandas as pd
@@ -23,9 +23,9 @@ def teilaufgabe_a(documents_train, documents_test):
     """
 
     # Implementieren Sie hier Ihre Lösung
-    vectorizer = CountVectorizer()
-    X_train = np.array(vectorizer.fit_transform(documents_train).toarray())
-    X_test = np.array(vectorizer.fit_transform(documents_test).toarray())
+    vectorizer = None
+    X_train = None
+    X_test = None
 
     return vectorizer, X_train, X_test
 
@@ -33,7 +33,7 @@ def teilaufgabe_a(documents_train, documents_test):
 def teilaufgabe_b(X, y):
     """
     Nutzen Sie den Trainingsdatensatz, um einen Naive Bayes Classifier zu trainieren.
-    Rückgabe: ein 2-tuple aus
+    Rückabe: ein 2-tuple aus
 
     priors: ein numpy array mit den a-priori Wahrscheinlichkeiten jeder Klasse
     conds: ein numpy array mit den Wahrscheinlichkeiten jedes Worts in jeder Klasse
@@ -41,12 +41,8 @@ def teilaufgabe_b(X, y):
     """
 
     # Implementieren Sie hier Ihre Lösung
-    nClasses, nFeatures = X.shape
-    priors = np.array(np.bincount(y) / nClasses)
-    conds = np.zeros((nClasses, nFeatures))
-    for aClass in range(nClasses):
-        X_class = X[y == aClass]
-        conds[aClass, :] = (X_class.sum(axis=0) + 1) / (X_class.sum() + nFeatures)
+    priors = None
+    conds = None
 
     return priors, conds
 
@@ -62,9 +58,6 @@ def teilaufgabe_c(X, classes, priors, conds):
     """
 
     # Implementieren Sie hier Ihre Lösung
-    prediction = np.zeros((X.shape[0], 1))
-    prediction_log_probs = np.zeros((X.shape[0], classes.size))
-
     prediction = None
     prediction_log_probs = None
 
@@ -89,6 +82,7 @@ if __name__ == "__main__":
     vectorizer, X_train, X_test = teilaufgabe_a(
         df_train["Lyrics"].values, df_test["Lyrics"].values
     )
+
     # Trainieren eines Naive Bayes Klassifikators
     priors, conds = teilaufgabe_b(X_train, y_train)
 
@@ -100,11 +94,13 @@ if __name__ == "__main__":
     print(
         "A-priori Wahrscheinlichkeit je Klasse: ", priors
     )  # zu erwarten: ~ [0.6833 0.3166]
+
     train_accuracy = np.mean(y_pred_train == y_train)
     print(f"Train Accuracy: {train_accuracy:.2f}")  # zu erwarten: >= 0.83
 
     test_accuracy = np.mean(y_pred_test == y_test)
     print(f"Test Accuracy: {test_accuracy:.2f}")  # zu erwarten: >= 0.81
+
     # Weitere manuelle Evaluation des Klassifikators mit Texten aus Nutzereingaben
     while True:
         user_input = input("Enter some text (or press Enter to exit): ")

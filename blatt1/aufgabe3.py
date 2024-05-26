@@ -1,7 +1,7 @@
 # -------------------------------
 # Abgabegruppe: Gruppe 10
 # Personen: Alisha Vaders, Moritz Leukert, Yann-Cédric Gagern
-# HU-Accountname: leukertm, vadersal, gagernya
+# HU-Accountname: vadersal, leukertm, gagernya
 # -------------------------------
 import numpy as np
 
@@ -39,7 +39,7 @@ def teilaufgabe_a():
 
     n = len(year_built)
     # initialize A with column of 1's, year_built, km_driven
-    matrix_A = np.concatenate([np.full((n,), 1)[:,np.newaxis],year_built[:,np.newaxis],km_driven[:,np.newaxis]], axis=1)
+    matrix_A = np.concatenate([np.full((n,), 1)[:, np.newaxis], year_built[:, np.newaxis], km_driven[:, np.newaxis]], axis=1)
 
     # check if operations can be performed
     if np.linalg.det(matrix_A.T @ matrix_A) == 0:
@@ -50,7 +50,7 @@ def teilaufgabe_a():
         return None
 
     # calculate k = (A.T*A)^-1 * A.T * y
-    k = np.linalg.inv(matrix_A.T @ matrix_A) @ matrix_A.T @ selling_price[:,np.newaxis]
+    k = np.linalg.inv(matrix_A.T @ matrix_A) @ matrix_A.T @ selling_price[:, np.newaxis]
     # use k to calculate prediction
     y_pred = k[0] + k[1]*year_built + k[2]*km_driven
 
@@ -84,7 +84,7 @@ def teilaufgabe_b():
                Der RMSE quantifiziert die Prognosegenauigkeit. In diesem Kontext bezieht er sich konkret auf die Prognose des Verkaufspreises mithilfe von multivariater
                linearer Regression unter Berücksichtigung des Baujahres und des Kilometerstandes. Der RMSE wird in der Einheit der Zielvariablen angegeben, 
                daher bedeutet ein Fehler von circa 0.94, dass die Prognosen der Verkaufspreise im Durchschnitt um 940$ von den tatsächlichen Werten abweichen. 
-               Die genaue Relevanz hängt vom Kontext ab, fast 1k Dollar abweichung ist definitiv perfekt, aber für lineare Regression wirkt es aktzeptabel.
+               Die genaue Relevanz hängt vom Kontext ab, fast 1 Tsd. Dollar Abweichung ist definitiv nicht perfekt, aber für lineare Regression wirkt es akzeptabel.
     '''
 
 
