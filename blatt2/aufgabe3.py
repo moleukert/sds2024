@@ -81,7 +81,7 @@ def teilaufgabe_c(X, classes, priors, conds):
     # TODO: check for errors and use classes
     X_samples, X_features = X.shape
     prediction = np.zeros((X_samples))
-    prediction_log_probs = np.zeros(X_samples)
+    prediction_log_probs = np.zeros((X_samples, len(classes)))
     for i in range(X_samples):
         # set a priori (no, yes)
         prob_n = priors[0]
