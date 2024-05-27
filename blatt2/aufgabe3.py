@@ -42,7 +42,7 @@ def teilaufgabe_b(X, y):
 
     # Implementieren Sie hier Ihre Lösung
     nClasses, nFeatures = X.shape
-    priors = np.array(np.bincount(y) / nClasses)
+    priors = np.array(np.bincount(y) /X.shape[0])
     conds = np.zeros((nClasses, nFeatures))
     for aClass in range(nClasses):
         X_class = X[y == aClass]

@@ -3,7 +3,7 @@ a)
     green eye = P(A)=P(A|B)P(B)+P(A|Bc)P(Bc) = 1*0.6+0.4*0.33 = 0.72
     A = guilty
     B = green eyes
-    P(A|B) = (P(B|A)*P(A))/P(B) = 1*0.6 / 0.72 = 0.83
+    P(A|B) = (P(B|A)*P(A))/P(B) = 1*0.6 / 0.72 = 0.82
     
 b)
     1/(0.02*n) gleichverteilt auf alle Personen mit B-

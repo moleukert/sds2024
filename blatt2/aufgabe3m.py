@@ -23,16 +23,16 @@ def teilaufgabe_a(documents_train, documents_test):
     """
 
     # Implementieren Sie hier Ihre Lösung
+    # initialize vectorizer
     vectorizer = CountVectorizer()
-    X_train = vectorizer.fit_transform(documents_train)
-    X_test = vectorizer.fit_transform(documents_test)
-
-    X_train = X_train.toarray()
-    X_test = X_test.toarray()
-
+    # fit and transform data then cobert to array
+    X_train = (vectorizer.fit_transform(documents_train)).toarray()
+    X_test = (vectorizer.fit_transform(documents_test)).toarray()
+    
+    #eliminate occurences over 1
     X_train[X_train>1] = 1
     X_test[X_test>1] = 1
-    np.savetxt("xtest.txt",X_test[0],delimiter=",",fmt="%d")
+    
     return vectorizer, X_train, X_test
 
 
@@ -47,28 +47,28 @@ def teilaufgabe_b(X, y):
     """
 
     # Implementieren Sie hier Ihre Lösung
-    sum = 0
-    for i, x in enumerate(y):
-        sum += x
-
-    priors = np.array([1-(sum/len(y)), sum/len(y)])
-    # go through each X[i] (this is one song) and 
-
+    # save dimensions and number of classes
     x_n, x_m = X.shape
-    conds = np.zeros((2,x_m))
-
-    for f in range(2):
+    numc =len(np.unique(y))
+    # init condition vektor
+    conds = np.zeros((numc,x_m))
+    # calculate prior probs
+    priors = np.array(np.bincount(y)/ x_n)
+    # iterate over classes and features to calc the cond probablities 
+    for f in range(numc):
+        # iterate over features
         for j in range(x_m):
+            # sum up feature occurences and overall class occurences
             sum = 0
             count = 0
             for i in range(x_n):              
                 if( y[i] == f):
                     sum+=X[i][j]
                     count+=1
-            # laplace glättung
+            # laplace smoothing
             sum += 1
             count += x_n * 1
-            # berechnung einer einzelnen conditional probability
+            # calc specific cond probability 
             conds[f][j] = sum/count
  
     return priors, conds
@@ -84,31 +84,33 @@ def teilaufgabe_c(X, classes, priors, conds):
                                 shape: (Zeilen im Datensatz x mögliche Klassen)
     """
     # Implementieren Sie hier Ihre Lösung
-    # TODO: check for errors and use classes
+    # save dimensions
     x_n, x_m = X.shape
+    # init prediction vectors
     prediction = np.zeros(x_n)
-    prediction_log_probs = np.zeros(x_n)
+    prediction_log_probs = np.zeros((x_n,len(classes)))
+    # placeholder for final probabilty of each class
+    probc = np.zeros(len(classes))
+
     for i in range(x_n):
-        # set a priori (no, yes)
-        prob_n = priors[0]
-        prob_y = priors[1]
+        # set a priori (for each class)
+        for k,_ in enumerate(probc):
+            probc[k] = priors[k]
         # multiply with conditional
         for j in range(x_m):
             # check if we have the feature or not
             t = abs(X[i][j] -1)
             
             # conditional for each class
-            prob_n *= abs(t - conds[0][j])
-            prob_y *= abs(t - conds[1][j])
+            for k,_ in enumerate(probc):
+                probc[k] *= abs(t - conds[k][j])
         # catch 0
-        if(prob_n == 0):
-            prob_n = 6e-323
-        if(prob_y == 0):
-            prob_y = 6e-323
-        
+        probc[probc==0] = 6e-323
         # compare probs
-        prediction[i] = (prob_y > prob_n)
-        prediction_log_probs[i] = np.log(prob_y)
+        prediction[i] = (probc[1] > probc[0])
+        for k,_ in enumerate(probc):
+            prediction_log_probs[i][k] = np.log(probc[k])
+
 
     return prediction, prediction_log_probs
 
@@ -150,7 +152,7 @@ if __name__ == "__main__":
 
     test_accuracy = np.mean(y_pred_test == y_test)
     print(f"Test Accuracy: {test_accuracy:.2f}")  # zu erwarten: >= 0.81
-    exit()
+    
     # Weitere manuelle Evaluation des Klassifikators mit Texten aus Nutzereingaben
     while True:
         user_input = input("Enter some text (or press Enter to exit): ")

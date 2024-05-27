@@ -6,12 +6,12 @@ a)
 b) 
     propability for a 5: 1/6
     variations: all 5, two 5, one 5
-    combined: (1/6)^3 + (1/6)^2 * 5/6 + 1/6*(5/6)^2 = 31/216 = 0.1435
+    combined: (1/6)^3 + (1/6)^2 * 4/6 + 1/6*(4/6)^2 = 7/72 = 0.0972
 
 c)
     propability for win: 1/2
     variations: one win, 2 wins
-    combined: (1/2)^2 + (1/2)^2 = 1/2 = 0.5
+    combined: (1/2) + (1/2)^2 = 1/2 = 0.75
 
 d) 
     propability for a specific ball: 1/12
@@ -21,10 +21,10 @@ d)
     1* 11/12 * 10/12 * 3/12 = 41/96 = 0.427
 
 e) 
-    1 215 Personen * 0.046 = 55.89 | 1159.11
-    Preis 9959,95
-    11544677.64 for non defect products - 556661.6055 for defect products + 15734.25 for insurance
-    = 11003750.29 expected earnings
+    1 215 Personen * 0.0046 = 5.589 | 1209.411
+    Preis 995,95
+    15734.25 for insurance - 5566.36455 for defect products 
+    = 10167.88545 expected earnings
 
 
 
