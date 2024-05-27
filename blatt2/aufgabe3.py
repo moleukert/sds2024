@@ -24,8 +24,11 @@ def teilaufgabe_a(documents_train, documents_test):
 
     # Implementieren Sie hier Ihre Lösung
     vectorizer = CountVectorizer()
-    X_train = np.array(vectorizer.fit_transform(documents_train).toarray())
-    X_test = np.array(vectorizer.fit_transform(documents_test).toarray())
+    X_train = vectorizer.fit_transform(documents_train).toarray()
+    X_test = vectorizer.fit_transform(documents_test).toarray()
+
+    X_train[X_train > 1] = 1
+    X_test[X_test > 1] = 1
 
     return vectorizer, X_train, X_test
 
@@ -41,12 +44,25 @@ def teilaufgabe_b(X, y):
     """
 
     # Implementieren Sie hier Ihre Lösung
-    nClasses, nFeatures = X.shape
-    priors = np.array(np.bincount(y) /X.shape[0])
-    conds = np.zeros((nClasses, nFeatures))
-    for aClass in range(nClasses):
-        X_class = X[y == aClass]
-        conds[aClass, :] = (X_class.sum(axis=0) + 1) / (X_class.sum() + nFeatures)
+
+    priors = np.array(np.bincount(y) / X.shape[0])
+    X_samples, X_features,  = X.shape
+    classes = len(np.unique(y))
+
+    conds = np.zeros((classes, X_features))
+    for f in range(classes):
+        for j in range(X_features):
+            sum = 0
+            count = 0
+            for i in range(X_samples):
+                if y[i] == f:
+                    sum += X[i][j]
+                    count += 1
+            # laplace glättung
+            sum += 1
+            count += X_samples * 1
+            # berechnung einer einzelnen conditional probability
+            conds[f][j] = sum / count
 
     return priors, conds
 
@@ -62,11 +78,31 @@ def teilaufgabe_c(X, classes, priors, conds):
     """
 
     # Implementieren Sie hier Ihre Lösung
-    prediction = np.zeros((X.shape[0], 1))
-    prediction_log_probs = np.zeros((X.shape[0], classes.size))
+    # TODO: check for errors and use classes
+    X_samples, X_features = X.shape
+    prediction = np.zeros((X_samples))
+    prediction_log_probs = np.zeros((X_samples, len(classes)))
+    for i in range(X_samples):
+        # set a priori (no, yes)
+        prob_n = priors[0]
+        prob_y = priors[1]
+        # multiply with conditional
+        for j in range(X_features):
+            # check if we have the feature or not
+            t = abs(X[i][j] - 1)
 
-    prediction = None
-    prediction_log_probs = None
+            # conditional for each class
+            prob_n *= abs(t - conds[0][j])
+            prob_y *= abs(t - conds[1][j])
+        # catch 0
+        if prob_n == 0:
+            prob_n = 6e-323
+        if prob_y == 0:
+            prob_y = 6e-323
+
+        # compare probs
+        prediction[i] = (prob_y > prob_n)
+        prediction_log_probs[i] = np.log(prob_y)
 
     return prediction, prediction_log_probs
 
