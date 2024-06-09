@@ -81,7 +81,6 @@ def teilaufgabe_c(expected_value_fair, spieler_name=1, tisch_name="B"):
     casino['zeit'] = pd.to_datetime(casino['zeit'])
     casino = casino[(casino['tisch'] == tisch_name) &
                     (casino['spieler'] == spieler_name)]
-    casino.sort_values(by=['zeit'], inplace=True)
     casino['sample_mean'] = casino['ergebnis'].expanding().mean()
 
     plt.plot(casino['zeit'], casino['sample_mean'], label=f'Sample Mean der Würfelergebnisse des Spielers {spieler_name}')
