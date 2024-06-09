@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
-
+import matplotlib.dates as mdates
 
 def teilaufgabe_a():
     """
@@ -20,14 +20,17 @@ def teilaufgabe_a():
     cdf: Kumulative Wahrscheinlichkeitsverteilungsfunktion
     """
 
-    # Implementieren Sie hier Ihre Lösung
-    sides = None
-    side_probabilities = None
-    expected_value = None
+    sides = np.array([1, 1, 1, 1, 2, 2, 2, 4, 4, 8, 16, 32], dtype=int)
+    side_probabilities = np.full(shape=len(sides), fill_value=1/len(sides), dtype=float)
+    expected_value = np.sum(sides * side_probabilities)
 
     def cdf(X: float):
-        # Implementieren Sie hier Ihre Lösung
-        return None
+        cumu_prob = 0
+        for side, prob in zip(sides, side_probabilities):
+            if side <= X:
+                cumu_prob += prob
+
+        return cumu_prob
 
     return sides, side_probabilities, expected_value, cdf
 
@@ -40,8 +43,22 @@ def teilaufgabe_b():
     """
     fig, ax = plt.subplots()
 
-    # Implementieren Sie hier Ihre Lösung
-    sample_mean = None
+    casino = pd.read_csv('casino.csv')
+    casino['zeit'] = pd.to_datetime(casino['zeit'])
+    casino = casino[(casino['zeit'].dt.hour >= 21) &
+                (casino['tisch'] == 'B') &
+                (casino['spieler'] == 1)]
+
+    sample_mean = np.mean(casino['ergebnis'])
+
+    count_results = casino['ergebnis'].value_counts()
+    rel_proba = count_results / casino['ergebnis'].count()
+    rel_proba.sort_index(inplace=True)
+
+    rel_proba.plot(kind='bar', xlabel='Ergebnis', ylabel='Relative Häufigkeiten', edgecolor='k', zorder=2) # theoretisch nicht alle möglichen Ergebnisse dabei
+    plt.title('Relative Häufigkeiten der Würfelergebnisse für Spieler 1 an Tisch B nach 21:00 Uhr', fontsize=10)
+    plt.xticks(rotation=0)
+    plt.grid(zorder=0)
 
     return fig, sample_mean
 
@@ -54,7 +71,25 @@ def teilaufgabe_c(expected_value_fair, spieler_name=1, tisch_name="B"):
 
     fig, ax = plt.subplots()
 
-    # Implementieren Sie hier Ihre Lösung
+    casino = pd.read_csv('casino.csv')
+    casino['zeit'] = pd.to_datetime(casino['zeit'])
+    casino = casino[(casino['tisch'] == tisch_name) &
+                    (casino['spieler'] == spieler_name)]
+    casino.sort_values(by=['zeit'], inplace=True)
+    casino['sample_mean'] = casino['ergebnis'].expanding().mean()
+
+    plt.plot(casino['zeit'], casino['sample_mean'], label=f'Sample Mean der Würfelergebnisse des Spielers {spieler_name}')
+    plt.axhline(y=expected_value_fair, linestyle='dashed', color='grey', label='Erwartungswert')
+    plt.axvline(pd.to_datetime('2024-03-27 21:00:00'), linestyle='dotted', color='grey', label='Zeitpunkt des möglichen Würfeltauschs - 21 Uhr')
+
+    plt.xlabel('Zeitpunkt')
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d-%m %Hh'))
+    plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=1))
+    plt.gcf().autofmt_xdate()
+    plt.ylabel('Sample Mean')
+    plt.title(f'Zeitlicher Ablauf der Würfelergebnisse von Spieler {spieler_name} an Tisch {tisch_name}', fontsize=10)
+    plt.legend(loc='best')
+    plt.grid(zorder=0)
 
     return fig
 
