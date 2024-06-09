@@ -46,8 +46,8 @@ def teilaufgabe_b():
     casino = pd.read_csv('casino.csv')
     casino['zeit'] = pd.to_datetime(casino['zeit'])
     casino = casino[(casino['zeit'].dt.hour >= 21) &
-                (casino['tisch'] == 'B') &
-                (casino['spieler'] == 1)]
+                    (casino['tisch'] == 'B') &
+                    (casino['spieler'] == 1)]
 
     sample_mean = np.mean(casino['ergebnis'])
 
