@@ -103,7 +103,7 @@ def teilaufgabe_c(expected_value_fair, spieler_name=1, tisch_name="B"):
     er würfelt tendenziell immer höhere Zahlen. Wohingegen der Samples Mean von Spieler 2 nah am Erwartungswert bleibt.
     Das Gesetz der großen Zahlen besagt, dass die beobachtete Häufigkeit, mit der ein Zufallsereignis eintritt, sich
     dem rechnerischen Erwartungswert weiter annähert, so häufiger das Experiment durchgeführt wird. Die Ergebnisse von
-    Spieler B treffen auf diese Beschreibung zu, bei Spieler A ist dies nicht zu beobachten, was wiederum den Einsatz
+    Spieler 2 treffen auf diese Beschreibung zu, bei Spieler 1 ist dies nicht zu beobachten, was wiederum den Einsatz
     eines manipulierten Würfels naheliegt.
     """
 
