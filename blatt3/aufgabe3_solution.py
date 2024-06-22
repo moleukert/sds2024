@@ -76,13 +76,13 @@ def teilaufgabe_c(expected_value_fair, spieler_name=1, tisch_name="B"):
     Rückgabewert:
     fig: die matplotlib figure
     """
-    df= pd.read_csv("casino.csv", index_col=False)
+    df = pd.read_csv("casino.csv", index_col=False)
     df["zeit"] = pd.to_datetime(df["zeit"])
-    change_time= pd.Timestamp("2024-03-27 21:00:00")
+    change_time = pd.Timestamp("2024-03-27 21:00:00")
 
-    df_b=df[(df.spieler == spieler_name) & (df.tisch == tisch_name)]
+    df_b = df[(df.spieler == spieler_name) & (df.tisch == tisch_name)]
 
-    sample_means = df_b["ergebnis"]. expanding().mean()
+    sample_means = df_b["ergebnis"].expanding().mean()
 
     fig, ax = plt.subplots()
     ax.plot(

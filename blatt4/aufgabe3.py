@@ -18,16 +18,39 @@ def teilaufgabe_a():
     expected_mean: float
     """
     # TODO Implementieren Sie hier Ihre Lösung
-    fig = None
-    expected_mean = (sum(range(1,7))*2)/12*200
+    fig, ax = plt.subplots()
+    expected_mean = sum(range(1,7)) / 6 * 2
     experiment = pd.DataFrame(index=range(1,10001), columns=['Ergebnis', 'Sample Mean'])
 
     experiment['Ergebnis'] = np.random.randint(1,7,len(experiment)) + np.random.randint(1,7,len(experiment))
+    sample_means = experiment['Ergebnis'].expanding().mean()
 
-    for index in experiment.iterrows():
+    ax.hist(
+        sample_means,
+        bins=50,
+        alpha=0.80,
+        edgecolor='k',
+        label=f""
+    )
 
+    ax.axvline(
+        expected_mean,
+        ymin=0,
+        ymax=1,
+        label="Expected Mean der beiden Würfel",
+        color="grey",
+        linestyle=":",
+    )
+    ax.set_title('Häufigkeitsverteilung des Sample Means für alle 10.000 Durchläufe', fontsize=10)
+    ax.set_ylabel("Absolute Häufigkeit des Sample Means")
+    ax.set_xlabel("Sample Mean der Würfelsumme aus zwei fairen, sechsseitigen Würfeln")
+    ax.legend()
     '''
-    Interpretation:
+    Interpretation: Das Histogramm zeigt, dass sich die wirkliche Verteilung um den erwarteten Mittelwert verteilt.
+    Laut des zentralen Grenzwertsatzes sollte sich der Mittelwert unabhängiger und identisch verteilter Zufallsvariablen
+    bei einer beliebigen Verteilung mit zunehmendem Stichprobenumfang der Normalverteilung annähren.
+    Die hier beobachtete Verteilung bestätigt diese Aussage und somit den zentralen Grenzwertsatz, da sie einer 
+    Normalverteilung, welche um den erwarteten Mittelwert verteilt ist, nahe kommt. 
     '''
     return fig, expected_mean
 
