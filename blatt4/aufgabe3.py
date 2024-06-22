@@ -17,10 +17,14 @@ def teilaufgabe_a():
     fig: die matplotlib figure
     expected_mean: float
     """
-
-    # Implementieren Sie hier Ihre Lösung
+    # TODO Implementieren Sie hier Ihre Lösung
     fig = None
-    expected_mean = None
+    expected_mean = (sum(range(1,7))*2)/12*200
+    experiment = pd.DataFrame(index=range(1,10001), columns=['Ergebnis', 'Sample Mean'])
+
+    experiment['Ergebnis'] = np.random.randint(1,7,len(experiment)) + np.random.randint(1,7,len(experiment))
+
+    for index in experiment.iterrows():
 
     '''
     Interpretation:
@@ -35,7 +39,7 @@ def teilaufgabe_b():
     """
     figures = []
 
-    # Implementieren Sie hier Ihre Lösung
+    # TODO Implementieren Sie hier Ihre Lösung
 
     '''
     Interpretation:
@@ -50,7 +54,7 @@ def teilaufgabe_c():
     """
     figures = []
 
-    # Implementieren Sie hier Ihre Lösung
+    # TODO Implementieren Sie hier Ihre Lösung
 
     '''
     Interpretation:
