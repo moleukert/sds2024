@@ -1,7 +1,7 @@
 # -------------------------------
-# Abgabegruppe:
-# Personen:
-# HU-Accountname:
+# Abgabegruppe: Gruppe 10
+# Personen: Alisha Vaders, Moritz Leukert, Yann-Cédric Gagern
+# HU-Accountname: vadersal, leukertm, gagernya
 # -------------------------------
 from os.path import realpath
 
