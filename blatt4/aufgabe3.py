@@ -17,22 +17,19 @@ def teilaufgabe_a():
     fig: die matplotlib figure
     expected_mean: float
     """
-    # TODO Implementieren Sie hier Ihre Lösung
     fig, ax = plt.subplots()
-    expected_mean = sum(range(1,7)) / 6 * 2
-    experiment = pd.DataFrame(index=range(1,10001), columns=['Ergebnis', 'Sample Mean'])
+    expected_mean = sum(range(1, 7)) / 6 * 2 # 3.5 für einen Würfel -> 7.0 für zwei
+    experiment = pd.DataFrame(index=range(1, 10001), columns=['Ergebnis', 'Sample Mean'])
 
-    experiment['Ergebnis'] = np.random.randint(1,7,len(experiment)) + np.random.randint(1,7,len(experiment))
+    experiment['Ergebnis'] = np.random.randint(1, 7, len(experiment)) + np.random.randint(1, 7, len(experiment))
     sample_means = experiment['Ergebnis'].expanding().mean()
 
     ax.hist(
         sample_means,
-        bins=50,
-        alpha=0.80,
         edgecolor='k',
-        label=f""
+        zorder=2
     )
-
+    ax.grid(zorder=0)
     ax.axvline(
         expected_mean,
         ymin=0,
@@ -63,6 +60,14 @@ def teilaufgabe_b():
     figures = []
 
     # TODO Implementieren Sie hier Ihre Lösung
+    m = 10000
+    n = 50
+    # 1) Hypergeometrische Verteilung h(x|49; 6; 6)
+    N = 49  # Gesamtanzahl der Kugeln
+    K = 6   # Anzahl der richtigen Kugeln
+    n_hy = 6  # Anzahl der gezogenen Kugeln
+    # 2) Poisson Verteilung p(x)
+    lambda_po = 3.17
 
     '''
     Interpretation:
