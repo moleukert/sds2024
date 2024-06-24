@@ -22,6 +22,7 @@ def teilaufgabe_a():
     experiment = pd.DataFrame(index=range(1, 10001), columns=['Ergebnis', 'Sample Mean'])  # Dataframe für Würfeln
     n, m = 200, 10000
     # Zufälliges Würfeln mit zwei fairen, sechsseitigen Würfeln
+
     for i in range(1, m+1):
         experiment['Ergebnis'][i] = np.sum(np.random.randint(1, 7, (n, 2)))
         experiment['Sample Mean'][i] = experiment['Ergebnis'][i] / n
@@ -142,7 +143,7 @@ def teilaufgabe_c():
             x = np.linspace(-3, 3, 1000)
             y = (1 / np.sqrt(2 * np.pi)) * np.exp(-0.5 * x**2)
             axes[jdx].plot(x, y, linestyle='dashed', color='orange')  # Standardnormalverteilung hinzufügen
-
+            axes[jdx].grid(linestyle='dashed', zorder=0)
             axes[jdx].legend()
 
         plt.xlabel('z-transformierter Sample Mean')
