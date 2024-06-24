@@ -20,11 +20,13 @@ def teilaufgabe_a():
     fig, ax = plt.subplots()
     expected_mean = sum(range(1, 7)) / 6 * 2  # 3.5 für einen Würfel -> 7.0 für zwei
     experiment = pd.DataFrame(index=range(1, 10001), columns=['Ergebnis', 'Sample Mean'])  # Dataframe für Würfeln
+    n, m = 200, 10000
     # Zufälliges Würfeln mit zwei fairen, sechsseitigen Würfeln
-    experiment['Ergebnis'] = np.random.randint(1, 7, len(experiment)) + np.random.randint(1, 7, len(experiment))
-    sample_means = experiment['Ergebnis'].expanding().mean()
+    for i in range(1, m+1):
+        experiment['Ergebnis'][i] = np.sum(np.random.randint(1, 7, (n, 2)))
+        experiment['Sample Mean'][i] = experiment['Ergebnis'][i] / n
 
-    ax.hist(sample_means, edgecolor='k')
+    ax.hist(experiment['Sample Mean'], edgecolor='k')
     ax.set_xticks(range(2, 13, 1))
     ax.axvline(
         expected_mean,
