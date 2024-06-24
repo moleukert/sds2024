@@ -46,7 +46,7 @@ def teilaufgabe_b():
             (df.spieler == spieler_name) & (df.tisch == tisch_name) & (df.zeit >= change_time)
     )]
 
-    ergebnis_counts = df_b.ergebnis.value_counts( ). sort_index( )
+    ergebnis_counts = df_b.ergebnis.value_counts().sort_index()
     unique_sides = ergebnis_counts.index
 
     y1 = ergebnis_counts.values / np.sum(ergebnis_counts.values)

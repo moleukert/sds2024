@@ -24,11 +24,7 @@ def teilaufgabe_a():
     experiment['Ergebnis'] = np.random.randint(1, 7, len(experiment)) + np.random.randint(1, 7, len(experiment))
     sample_means = experiment['Ergebnis'].expanding().mean()
 
-    ax.hist(
-        sample_means,
-        bins=range(2, 13, 1),
-        edgecolor='k'
-    )
+    ax.hist(sample_means, edgecolor='k')
     ax.set_xticks(range(2, 13, 1))
     ax.axvline(
         expected_mean,
@@ -108,7 +104,7 @@ def teilaufgabe_b():
     beide Verteilungen um den Mittelwert die höchsten Häufigkeiten aufweisen und diese Häufigkeiten in beide Richtungen
     symmetrisch abnehmen.
     Bei den Summen und Mittelwerten der Poisson Verteilung verhält es sich ähnlich, allerdings gibt es hier bei manchen
-    Werten ein paar Ausreisen d.h. diese Werte sind mit höherer Häufigkeit zu beobachten, als es unter einer 
+    Werten ein paar Ausreißer d.h. diese Werte sind mit höherer Häufigkeit zu beobachten, als es unter einer 
     Normalverteilung angenommen wird.
     Trotz der verschiedenen ursprünglichen Verteilungen konvergieren beide Summen und Mittelwerte bei der großen Anzahl
     von Stichproben zur Form einer Normalverteilung und zeigen das erwartete Verhalten gemäß zentralem Grenzwertsatz.
@@ -123,10 +119,45 @@ def teilaufgabe_c():
     """
     figures = []
 
-    # TODO Implementieren Sie hier Ihre Lösung
+    mValues = [10, 100, 1000, 10000]
+    n = 6
+    targetAttributes = ['HP', 'Attack', 'Speed']
+    pokemon = pd.read_csv('pokemon.csv')
+    colors = ['limegreen', 'lightcoral', 'cornflowerblue']
 
+    for idx, attribute in enumerate(targetAttributes):  # Für jedes Attribut
+        fig, axes = plt.subplots(len(mValues), 1, sharex='all')
+        fig.suptitle(attribute)
+        for jdx, mValue in enumerate(mValues): # Für jeden M Wert
+            sampleMeans = [np.mean(pokemon[attribute].sample(n)) for _ in range(mValue)]  # von m-Mal sampeln 0 bis m-1
+
+            zSampleMeans = (sampleMeans - np.mean(sampleMeans)) / np.std(sampleMeans)  # Z-Transformation durchführen
+
+            axes[jdx].hist( # Histogramm mit den relativen Häufigenkeiten hinzufügen
+                zSampleMeans,
+                density=True,
+                bins=40, color=colors[idx], edgecolor='k', label=f'{mValue = }', zorder=2)
+            x = np.linspace(-3, 3, 1000)
+            y = (1 / np.sqrt(2 * np.pi)) * np.exp(-0.5 * x**2)
+            axes[jdx].plot(x, y, linestyle='dashed', color='orange')  # Standardnormalverteilung hinzufügen
+
+            axes[jdx].legend()
+
+        plt.xlabel('z-transformierter Sample Mean')
+        plt.ylabel('relative Häufigkeit')
+        plt.tight_layout()
+
+        figures.append(fig)
     '''
-    Interpretation:
+    Interpretation: Bei m=10 zeigt die Verteilung eine grobe Abweichung von der Normalverteilung, dies ist zu erwarten,
+    da der Stichprobenumfang sehr gering ist.
+    Mit m=100 bessert sich die Verteilung, wie erwartet. Da der Stichprobenumfang wächst nähert sich die Verteilung, 
+    einer Normalverteilung, allerdings gibt nichtsdestotrotz noch ein paar unerwartete Ausreißer.
+    Bei m=1000 ist der Stichprobenumfang so groß, dass die Verteilung einer Normalverteilung sehr nahe kommt. Es gibt
+    zwar noch hier und dort ein paar dezente Abweichungen, dennoch kommt der zentrale Grenzwertsatz hier sichtlich zum 
+    tragen. Bei einem Stichprobenumfang von m=10000 sieht man eine nahezu perfekte Normalverteilung durch die Verteilung,
+    dieses letzte Diagramm der Verteilung bestätigt den zentralen Grenzwertsatz. Die Verteilung der transformierten
+    Mittelwerte aus der Stichprobe näheren sich einer Normalverteilung äußerst gut an.
     '''
     return figures
 
