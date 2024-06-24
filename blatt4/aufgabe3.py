@@ -21,14 +21,13 @@ def teilaufgabe_a():
     expected_mean = sum(range(1, 7)) / 6 * 2  # 3.5 für einen Würfel -> 7.0 für zwei
     experiment = pd.DataFrame(index=range(1, 10001), columns=['Ergebnis', 'Sample Mean'])  # Dataframe für Würfeln
     n, m = 200, 10000
-    # Zufälliges Würfeln mit zwei fairen, sechsseitigen Würfeln
 
+    # Zufälliges Würfeln mit zwei fairen, sechsseitigen Würfeln
     for i in range(1, m+1):
         experiment['Ergebnis'][i] = np.sum(np.random.randint(1, 7, (n, 2)))
         experiment['Sample Mean'][i] = experiment['Ergebnis'][i] / n
 
-    ax.hist(experiment['Sample Mean'], edgecolor='k')
-    ax.set_xticks(range(2, 13, 1))
+    ax.hist(experiment['Sample Mean'], bins=40, edgecolor='k')
     ax.axvline(
         expected_mean,
         ymin=0,
@@ -59,7 +58,6 @@ def teilaufgabe_b():
     figures: Eine Liste aller matplotlib Figures
     """
     figures = []
-
     m = 10000  # Wiederholungen
     n = 50  # mit je zufälligen Samples
 
@@ -121,7 +119,6 @@ def teilaufgabe_c():
     figures: Eine Liste aller matplotlib Figures
     """
     figures = []
-
     mValues = [10, 100, 1000, 10000]
     n = 6
     targetAttributes = ['HP', 'Attack', 'Speed']
