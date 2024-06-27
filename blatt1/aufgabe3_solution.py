@@ -1,4 +1,4 @@
-# Lösung von Moodle übung 3
+# Lösung aus Moodle übung 3
 import numpy as np
 
 

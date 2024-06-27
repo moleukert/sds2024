@@ -1,8 +1,4 @@
-# -------------------------------
-# Abgabegruppe: Gruppe 10
-# Personen: Alisha Vaders, Moritz Leukert, Yann-Cédric Gagern
-# HU-Accountname: vadersal, leukertm, gagernya
-# -------------------------------
+# Lösung aus Moodle übung 5
 from os.path import realpath
 
 import numpy as np

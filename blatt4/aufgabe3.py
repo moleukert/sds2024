@@ -127,7 +127,7 @@ def teilaufgabe_c():
 
     for idx, attribute in enumerate(targetAttributes):  # Für jedes Attribut
         fig, axes = plt.subplots(len(mValues), 1, sharex='all')
-        fig.suptitle(attribute)
+        fig.suptitle(f'Histogramme für das Attribut {attribute}')
         for jdx, mValue in enumerate(mValues): # Für jeden M Wert
             sampleMeans = [np.mean(pokemon[attribute].sample(n)) for _ in range(mValue)]  # von m-Mal sampeln 0 bis m-1
 
@@ -136,7 +136,7 @@ def teilaufgabe_c():
             axes[jdx].hist( # Histogramm mit den relativen Häufigenkeiten hinzufügen
                 zSampleMeans,
                 density=True,
-                bins=40, color=colors[idx], edgecolor='k', label=f'{mValue = }', zorder=2)
+                bins=40, color=colors[idx], edgecolor='k', label=f'm = {mValue}', zorder=2)
             x = np.linspace(-3, 3, 1000)
             y = (1 / np.sqrt(2 * np.pi)) * np.exp(-0.5 * x**2)
             axes[jdx].plot(x, y, linestyle='dashed', color='orange')  # Standardnormalverteilung hinzufügen
@@ -151,13 +151,13 @@ def teilaufgabe_c():
     '''
     Interpretation: Bei m=10 zeigt die Verteilung eine grobe Abweichung von der Normalverteilung, dies ist zu erwarten,
     da der Stichprobenumfang sehr gering ist.
-    Mit m=100 bessert sich die Verteilung, wie erwartet. Da der Stichprobenumfang wächst nähert sich die Verteilung, 
-    einer Normalverteilung, allerdings gibt nichtsdestotrotz noch ein paar unerwartete Ausreißer.
+    Mit m=100 bessert sich die Verteilung, wie erwartet. Da der Stichprobenumfang wächst, nähert sich die Verteilung 
+    einer Normalverteilung an, allerdings gibt es nichtsdestotrotz noch ein paar unerwartete Ausreißer.
     Bei m=1000 ist der Stichprobenumfang so groß, dass die Verteilung einer Normalverteilung sehr nahe kommt. Es gibt
     zwar noch hier und dort ein paar dezente Abweichungen, dennoch kommt der zentrale Grenzwertsatz hier sichtlich zum 
     tragen. Bei einem Stichprobenumfang von m=10000 sieht man eine nahezu perfekte Normalverteilung durch die Verteilung,
-    dieses letzte Diagramm der Verteilung bestätigt den zentralen Grenzwertsatz. Die Verteilung der transformierten
-    Mittelwerte aus der Stichprobe näheren sich einer Normalverteilung äußerst gut an.
+    der jeweils letzten Diagramme, welche den zentralen Grenzwertsatz bestätigen. Somit nähren sich die Verteilungen der 
+    transformierten Mittelwerte aus der Stichprobe einer Normalverteilung äußerst gut an.
     '''
     return figures
 
