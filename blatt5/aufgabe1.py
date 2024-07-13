@@ -34,7 +34,7 @@ def teilaufgabe_b(samples_a, samples_b):
     s_squared = ((n - 1) * np.var(samples_a, ddof=1) + (m - 1) * np.var(samples_b, ddof=1)) / (n + m - 2)
     t_value = mean_diff / np.sqrt(s_squared * (1/n + 1/m))  # t-Wert
     p_value = t.cdf(-t_value, (n + m - 2))  # p-Wert bei einseitigem Test
-    decision = p_value < 0.05  # p-Wert < Signifikanzniveau → H0 kann zugunsten HA verworfen werden
+    decision = p_value <= 0.05  # p-Wert ≤ Signifikanzniveau → H0 kann zugunsten HA verworfen werden
     """
     Interpretation: Formulieren Sie hier ihre Antwort. 
     Die Wahrscheinlichkeit, dieses oder eines extremeren Ergebnisses liegt bei circa 3,8%. Damit liegt sie unter dem 
@@ -55,7 +55,7 @@ def teilaufgabe_c(samples_a, samples_b):
     """
 
     p_value = mannwhitneyu(samples_a, samples_b, alternative='greater').pvalue  # p-Wert bei einseitigem Test
-    decision = p_value < 0.05  # p-Wert < Signifikanzniveau → H0 kann zugunsten HA verworfen werden
+    decision = p_value <= 0.05  # p-Wert ≤ Signifikanzniveau → H0 kann zugunsten HA verworfen werden
 
     """
     Argumente: Formulieren Sie hier ihre Antwort.
